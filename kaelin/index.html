@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #000000 0%, #4B0082 50%, #006400 100%);
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        /* Card container */
+        .birthday-card {
+            max-width: 500px;
+            width: 100%;
+            background-color: #0a0a0a;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Card header */
+        .card-header {
+            background: linear-gradient(90deg, #800080 0%, #006400 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .card-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Decorative elements */
+        .decoration {
+            position: absolute;
+            font-size: 2rem;
+            animation: spin 5s linear infinite;
+        }
+        
+        .decoration:nth-child(1) {
+            top: 10px;
+            left: 20px;
+        }
+        
+        .decoration:nth-child(2) {
+            top: 10px;
+            right: 20px;
+        }
+        
+        /* Card content */
+        .card-content {
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            background-color: #121212;
+        }
+        
+        .message {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Confetti */
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+        
+        /* Generate 20 confetti pieces with different colors, positions, and animations */
+        .confetti:nth-child(1) { background-color: #800080; left: 10%; animation-duration: 3s; animation-delay: 0s; }
+        .confetti:nth-child(2) { background-color: #006400; left: 20%; animation-duration: 3.5s; animation-delay: 0.2s; }
+        .confetti:nth-child(3) { background-color: #9932CC; left: 30%; animation-duration: 2.8s; animation-delay: 0.4s; }
+        .confetti:nth-child(4) { background-color: #008000; left: 40%; animation-duration: 3.2s; animation-delay: 0.6s; }
+        .confetti:nth-child(5) { background-color: #BA55D3; left: 50%; animation-duration: 3.7s; animation-delay: 0.8s; }
+        .confetti:nth-child(6) { background-color: #006400; left: 60%; animation-duration: 3.1s; animation-delay: 1s; }
+        .confetti:nth-child(7) { background-color: #800080; left: 70%; animation-duration: 3.6s; animation-delay: 1.2s; }
+        .confetti:nth-child(8) { background-color: #228B22; left: 80%; animation-duration: 2.9s; animation-delay: 1.4s; }
+        .confetti:nth-child(9) { background-color: #9932CC; left: 90%; animation-duration: 3.3s; animation-delay: 1.6s; }
+        .confetti:nth-child(10) { background-color: #00FF00; left: 5%; animation-duration: 3.8s; animation-delay: 1.8s; }
+        .confetti:nth-child(11) { background-color: #BA55D3; left: 15%; animation-duration: 3.2s; animation-delay: 2s; }
+        .confetti:nth-child(12) { background-color: #006400; left: 25%; animation-duration: 3.7s; animation-delay: 2.2s; }
+        .confetti:nth-child(13) { background-color: #800080; left: 35%; animation-duration: 3s; animation-delay: 2.4s; }
+        .confetti:nth-child(14) { background-color: #32CD32; left: 45%; animation-duration: 3.5s; animation-delay: 2.6s; }
+        .confetti:nth-child(15) { background-color: #9932CC; left: 55%; animation-duration: 3.9s; animation-delay: 2.8s; }
+        .confetti:nth-child(16) { background-color: #006400; left: 65%; animation-duration: 3.3s; animation-delay: 3s; }
+        .confetti:nth-child(17) { background-color: #BA55D3; left: 75%; animation-duration: 3.8s; animation-delay: 3.2s; }
+        .confetti:nth-child(18) { background-color: #228B22; left: 85%; animation-duration: 3.1s; animation-delay: 3.4s; }
+        .confetti:nth-child(19) { background-color: #800080; left: 95%; animation-duration: 3.6s; animation-delay: 3.6s; }
+        .confetti:nth-child(20) { background-color: #00FF00; left: 2%; animation-duration: 4s; animation-delay: 3.8s; }
+        
+        /* Decorative border */
+        .border-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 5px solid transparent;
+            border-image: linear-gradient(45deg, #800080, #006400, #9932CC, #228B22, #BA55D3) 1;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        /* Footer */
+        .card-footer {
+            padding: 15px;
+            text-align: center;
+            background-color: #000000;
+            border-top: 1px solid #800080;
+            border-bottom: 1px solid #006400;
+        }
+        
+        .emoji-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(500px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            .card-header h1 {
+                font-size: 2rem;
+            }
+            
+            .message {
+                font-size: 1.2rem;
+            }
+            
+            .decoration {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="birthday-card">
+        <div class="card-header">
+            <span class="decoration">🎂</span>
+            <h1>Happy Birthday! <br> KAELIN!!</h1>
+            <span class="decoration">🎁</span>
+        </div>
+        
+        <div class="card-content">
+            <p class="message">Happy Birthday! I've been thinking about what to say to you, and really, the biggest thing is just how much I appreciate you. It's funny how you can feel close to someone, even when you haven't met face-to-face. Your dedication to your studies is something I genuinely admire. It's not just the hard work, but the consistent effort and passion you put into everything you do. Seeing that kind of dedication is really inspiring, and it pushes me to be better too. You’re such an amazing person, and I’m so thankful for your presence in my life. It's like having a companion, someone who understands, even from a distance. I often find myself thinking about your determination, and it's a real motivator. I hope your birthday is filled with all the things that bring you joy – laughter, good company, and a sense of accomplishment. You deserve all the happiness in the world, and I'm sending you the warmest wishes for a truly fantastic day. I hope you know how much your hard work is respected, and how much your friendship means, even if we've only connected online. Happy Birthday again! </p>
+            <div class="confetti-container">
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+            </div>
+            
+            <div class="border-decoration"></div>
+        </div>
+        
+        <div class="card-footer">
+            <div class="emoji-row">
+                <span>🎉</span>
+                <span>🎈</span>
+                <span>🎊</span>
+                <span>🎂</span>
+                <span>🎁</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
